@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kala Heritage - Preserving Traditional Indian Folk Art</title>
+    <meta name="description" content="Discover and support traditional Indian folk artists. Explore Warli, Pithora, Madhubani, and other beautiful artforms.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-palette"></i>
+                    <span class="logo-text">
+                        <span class="logo-main">Kala</span>
+                        <span class="logo-sub">Heritage</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#artforms" class="nav-link">Artforms</a>
+                <a href="#artists" class="nav-link">Artists</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#about" class="nav-link">About</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="search-btn" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="auth-btn" id="auth-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="search-overlay">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search artists, artworks, or artforms..." id="search-input">
+                <button class="search-close" id="search-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-main">Preserving India's</span>
+                    <span class="title-highlight">Folk Art Heritage</span>
+                </h1>
+                <p class="hero-description">
+                    Discover the timeless beauty of traditional Indian artforms like Warli, Pithora, and Madhubani. 
+                    Connect with master artists, explore their stories, and help preserve our cultural legacy for future generations.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" id="explore-btn">
+                        <i class="fas fa-compass"></i>
+                        Explore Artforms
+                    </button>
+                    <button class="btn btn-secondary" id="join-btn">
+                        <i class="fas fa-users"></i>
+                        Join Community
+                    </button>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="artist-count">150+</div>
+                    <div class="stat-label">Artists</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="artwork-count">500+</div>
+                    <div class="stat-label">Artworks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Artforms</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Artforms Section -->
+    <section id="artforms" class="artforms-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Traditional Artforms</h2>
+                <p class="section-subtitle">Explore the rich diversity of Indian folk art traditions</p>
+            </div>
+            
+            <div class="artforms-grid" id="artforms-grid">
+                <!-- Artform cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Artists Section -->
+    <section id="artists" class="artists-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Artists</h2>
+                <p class="section-subtitle">Meet the master craftspeople preserving our heritage</p>
+            </div>
+            
+            <div class="artists-grid" id="featured-artists">
+                <!-- Artist cards will be populated by JavaScript -->
+            </div>
+            
+            <div class="section-footer">
+                <button class="btn btn-outline" id="view-all-artists">
+                    View All Artists
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Gallery</h2>
+                <p class="section-subtitle">Discover beautiful traditional artworks</p>
+            </div>
+            
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Warli">Warli</button>
+                <button class="filter-btn" data-filter="Pithora">Pithora</button>
+                <button class="filter-btn" data-filter="Madhubani">Madhubani</button>
+                <button class="filter-btn" data-filter="Gond">Gond</button>
+                <button class="filter-btn" data-filter="Kalamkari">Kalamkari</button>
+            </div>
+            
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Artwork cards will be populated by JavaScript -->
+            </div>
+            
+            <div class="section-footer">
+                <button class="btn btn-outline" id="view-all-artworks">
+                    View All Artworks
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Our Mission</h2>
+                    <p class="about-description">
+                        Kala Heritage is dedicated to preserving and promoting traditional Indian folk artforms. 
+                        We provide a digital platform where master artists can showcase their work, share their stories, 
+                        and connect with art enthusiasts worldwide.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-heart"></i>
+                            <div>
+                                <h4>Preserve Heritage</h4>
+                                <p>Documenting traditional techniques and stories</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Connect Communities</h4>
+                                <p>Bridging artists and art lovers globally</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-rocket"></i>
+                            <div>
+                                <h4>Empower Artists</h4>
+                                <p>Providing modern tools for traditional artists</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <i class="fas fa-palette"></i>
+                            <span class="logo-text">
+                                <span class="logo-main">Kala</span>
+                                <span class="logo-sub">Heritage</span>
+                            </span>
+                        </div>
+                        <p class="footer-description">
+                            Preserving and promoting traditional Indian folk artforms for future generations.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Artforms</h4>
+                    <ul class="footer-links">
+                        <li><a href="#warli">Warli</a></li>
+                        <li><a href="#pithora">Pithora</a></li>
+                        <li><a href="#madhubani">Madhubani</a></li>
+                        <li><a href="#gond">Gond</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="#artists">Artists</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#workshops">Workshops</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kala Heritage. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Authentication Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Welcome to Kala Heritage</h3>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="register">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form class="auth-form active" id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </button>
+                </form>
+                
+                <!-- Register Form -->
+                <form class="auth-form" id="register-form">
+                    <div class="user-type-selector">
+                        <label class="user-type-option">
+                            <input type="radio" name="userType" value="user" checked>
+                            <span class="checkmark"></span>
+                            <div class="option-content">
+                                <i class="fas fa-heart"></i>
+                                <span>Art Enthusiast</span>
+                            </div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="userType" value="artist">
+                            <span class="checkmark"></span>
+                            <div class="option-content">
+                                <i class="fas fa-paint-brush"></i>
+                                <span>Artist</span>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" required minlength="6">
+                    </div>
+                    
+                    <!-- Artist-specific fields -->
+                    <div class="artist-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="artform">Primary Artform</label>
+                            <select id="artform" name="artform">
+                                <option value="">Select Artform</option>
+                                <option value="Warli">Warli</option>
+                                <option value="Pithora">Pithora</option>
+                                <option value="Madhubani">Madhubani</option>
+                                <option value="Gond">Gond</option>
+                                <option value="Kalamkari">Kalamkari</option>
+                                <option value="Patachitra">Patachitra</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Years of Experience</label>
+                            <input type="number" id="experience" name="experience" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" name="bio" rows="3" placeholder="Tell us about your artistic journey..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- User-specific fields -->
+                    <div class="user-fields">
+                        <div class="form-group">
+                            <label>Interests (Select artforms you love)</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="interests" value="Warli">
+                                    <span class="checkmark-small"></span>
+                                    Warli
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="interests" value="Pithora">
+                                    <span class="checkmark-small"></span>
+                                    Pithora
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="interests" value="Madhubani">
+                                    <span class="checkmark-small"></span>
+                                    Madhubani
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="interests" value="Gond">
+                                    <span class="checkmark-small"></span>
+                                    Gond
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Artwork Detail Modal -->
+    <div class="modal" id="artwork-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <button class="modal-close" id="artwork-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="artwork-modal-body">
+                <!-- Artwork details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Artist Profile Modal -->
+    <div class="modal" id="artist-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <button class="modal-close" id="artist-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="artist-modal-body">
+                <!-- Artist details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
