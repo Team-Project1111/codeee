@@ -165,4 +165,71 @@ router.get('/:id/stats', async (req, res) => {
   }
 });
 
+// Check artist verification status
+router.get('/:id/verification-status', async (req, res) => {
+  try {
+    const artist = await Artist.findById(req.params.id);
+    if (!artist) {
+      return res.status(404).json({ error: 'Artist not found' });
+    }
+
+    const artworkCount = await Artwork.countDocuments({ 
+      artist: req.params.id, 
+      status: 'published' 
+    });
+
+    const verificationStatus = {
+      isVerified: artist.isVerified,
+      artworkCount,
+      meetsCriteria: artworkCount >= 3,
+      criteria: {
+        requiredArtworks: 3,
+        currentArtworks: artworkCount
+      }
+    };
+
+    res.json(verificationStatus);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get verification statistics
+router.get('/verification/stats', async (req, res) => {
+  try {
+    const totalArtists = await Artist.countDocuments();
+    const verifiedArtists = await Artist.countDocuments({ isVerified: true });
+    const artistsWith3PlusArtworks = await Artist.aggregate([
+      {
+        $lookup: {
+          from: 'artworks',
+          localField: '_id',
+          foreignField: 'artist',
+          as: 'artworks'
+        }
+      },
+      {
+        $match: {
+          'artworks': { $exists: true, $ne: [] },
+          $expr: { $gte: [{ $size: '$artworks' }, 3] }
+        }
+      },
+      {
+        $count: 'count'
+      }
+    ]);
+
+    const stats = {
+      totalArtists,
+      verifiedArtists,
+      artistsWith3PlusArtworks: artistsWith3PlusArtworks[0]?.count || 0,
+      verificationRate: totalArtists > 0 ? ((verifiedArtists / totalArtists) * 100).toFixed(1) : 0
+    };
+
+    res.json(stats);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

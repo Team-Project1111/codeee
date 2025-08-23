@@ -1,66 +1,40 @@
-# 🎨 Kala Heritage - Digital Platform for Traditional Indian Folk Art
+# Kala Heritage - Traditional Indian Folk Art Platform
 
-**Preserving, Promoting, and Celebrating India's Rich Folk Art Heritage**
-
-Kala Heritage is a comprehensive digital platform designed to bridge the gap between traditional Indian folk artists and modern audiences. Our mission is to preserve cultural heritage while empowering artists with digital tools to showcase their work and sustain their livelihoods.
+A comprehensive digital platform dedicated to preserving, promoting, and creating engagement around traditional Indian folk artforms like Warli, Pithora, Madhubani, Gond, Kalamkari, and Patachitra.
 
 ## 🌟 Features
 
-### For Art Enthusiasts
-- **Discover Traditional Artforms**: Explore Warli, Pithora, Madhubani, Gond, Kalamkari, and Patachitra
-- **Artist Profiles**: Learn about master artists, their stories, and techniques
-- **Interactive Gallery**: Browse, filter, and discover beautiful artworks
-- **Personalized Experience**: Get recommendations based on your interests
-- **Community Engagement**: Like, comment, and follow your favorite artists
-- **Cultural Education**: Learn about the history and significance of each artform
+### Core Platform Features
+- **Interactive Gallery**: Browse and explore traditional artworks with filtering by artform
+- **Artist Profiles**: Detailed profiles showcasing artists' work, experience, and stories
+- **User Authentication**: Secure login/registration system for artists and art enthusiasts
+- **Search & Discovery**: Advanced search functionality across artists, artworks, and artforms
+- **Responsive Design**: Modern, mobile-friendly interface with beautiful animations
 
-### For Artists
-- **Professional Profiles**: Showcase your work and artistic journey
-- **Artwork Management**: Upload and manage your portfolio
-- **Direct Sales**: Sell your artworks directly to collectors
-- **Analytics**: Track views, likes, and engagement
-- **Community Building**: Connect with art enthusiasts and other artists
-- **Verification System**: Get verified status for authenticity
+### Content-Based Badging System
+- **Verification Badges**: Artists automatically receive verified badges after uploading 3+ artworks
+- **Verification Status**: Real-time tracking of verification progress
+- **Verification Statistics**: Platform-wide statistics and insights
+- **Interactive Badges**: Click on verification badges to view detailed status
 
-### Platform Features
-- **Responsive Design**: Beautiful UI optimized for all devices
-- **Real-time Interactions**: Instant likes, comments, and notifications
-- **Advanced Search**: Find artists and artworks with intelligent filtering
-- **Performance Optimized**: Fast loading with modern web technologies
-- **Secure Authentication**: JWT-based authentication system
-- **Modern UX**: Smooth animations and interactive elements
+### Artist Features
+- **Profile Management**: Complete artist profiles with bio, experience, and specializations
+- **Artwork Upload**: Easy artwork submission with detailed metadata
+- **Social Features**: Follow other artists, receive likes and comments
+- **Verification Progress**: Track progress towards verification status
 
-## 🛠 Technology Stack
+### User Features
+- **Artwork Discovery**: Browse and discover traditional artworks
+- **Artist Following**: Follow favorite artists and stay updated
+- **Favorites System**: Save and organize favorite artworks
+- **Community Engagement**: Like, comment, and interact with artworks
 
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **MongoDB** - Database
-- **Mongoose** - ODM for MongoDB
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
-- **Multer** - File upload handling
-
-### Frontend
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling with CSS Grid and Flexbox
-- **JavaScript (ES6+)** - Interactive functionality
-- **Font Awesome** - Icons
-- **Google Fonts** - Typography
-
-### Security & Performance
-- **Helmet.js** - Security headers
-- **Rate Limiting** - API protection
-- **Compression** - Response compression
-- **CORS** - Cross-origin resource sharing
-- **Input Validation** - Data sanitization
-
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v14 or higher)
 - MongoDB (v4.4 or higher)
-- npm or yarn package manager
+- npm or yarn
 
 ### Installation
 
@@ -75,213 +49,195 @@ Kala Heritage is a comprehensive digital platform designed to bridge the gap bet
    npm install
    ```
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+3. **Environment Setup**
+   Create a `.env` file in the root directory:
+   ```env
+   MONGODB_URI=mongodb://localhost:27017/kala-heritage
+   JWT_SECRET=your-secret-key-here
+   PORT=3000
    ```
 
-4. **Start MongoDB**
+4. **Database Setup**
    ```bash
-   # Make sure MongoDB is running on your system
-   mongod
+   npm run seed
    ```
 
-5. **Seed the database with sample data**
+5. **Start the application**
    ```bash
-   node seedData.js
+   npm start
    ```
 
-6. **Start the development server**
-   ```bash
-   npm run dev
-   ```
+6. **Access the platform**
+   Open your browser and navigate to `http://localhost:3000`
 
-7. **Open your browser**
-   Navigate to `http://localhost:3000`
+## 🏗️ Architecture
 
-## 📱 Demo Credentials
+### Backend (Node.js + Express)
+- **Models**: User, Artist, Artwork with comprehensive schemas
+- **Routes**: RESTful API endpoints for all platform features
+- **Middleware**: Authentication, rate limiting, and security
+- **Database**: MongoDB with Mongoose ODM
 
-### Sample Artist Accounts
-- **Madhubani Artist**: `meera.devi@example.com` / `password123`
-- **Warli Artist**: `ravi.bhil@example.com` / `password123`
-- **Pithora Artist**: `kiran.patel@example.com` / `password123`
+### Frontend (Vanilla JavaScript)
+- **Components**: Modular, reusable UI components
+- **API Service**: Centralized API communication
+- **Authentication**: JWT-based authentication system
+- **Responsive Design**: Mobile-first approach with modern CSS
 
-### Sample User Accounts
-- **Art Enthusiast**: `arjun.sharma@example.com` / `password123`
-- **Collector**: `priya.menon@example.com` / `password123`
+### Key Technologies
+- **Backend**: Node.js, Express.js, MongoDB, Mongoose
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Authentication**: JWT, bcryptjs
+- **Security**: Helmet, CORS, Rate Limiting
+- **Styling**: CSS Grid, Flexbox, CSS Variables
 
-## 🎯 Key Innovations
+## 📊 Verification Badge System
 
-### Cultural Preservation
-- **Digital Documentation**: Preserving traditional techniques and stories
-- **Artist Storytelling**: Platform for artists to share their heritage
-- **Educational Content**: Learning resources about each artform
+### How It Works
+1. **Automatic Verification**: Artists are automatically verified when they upload 3+ published artworks
+2. **Real-time Updates**: Verification status updates immediately when criteria are met
+3. **Visual Indicators**: Verified artists display badges on their profiles and artwork cards
+4. **Progress Tracking**: Artists can track their progress towards verification
 
-### Modern Technology Meets Tradition
-- **Responsive Design**: Accessible on all devices
-- **Interactive Features**: Engaging user experience
-- **Performance Optimized**: Fast loading and smooth animations
-- **Search & Discovery**: Advanced filtering and recommendation system
+### Verification Criteria
+- Upload minimum 3 published artworks
+- Maintain active account status
+- Follow platform guidelines
 
-### Community Building
-- **Artist-Audience Connection**: Direct interaction between creators and admirers
-- **Social Features**: Following, liking, commenting system
-- **Personalization**: Tailored content based on user preferences
+### Benefits of Verification
+- **Trust Building**: Verified badge increases credibility
+- **Enhanced Visibility**: Verified artists appear higher in search results
+- **Community Recognition**: Special recognition within the platform
+- **Access to Features**: Exclusive features for verified artists
 
-## 🏗 Project Structure
+## 🎨 Artforms Supported
 
-```
-kala-heritage/
-├── server.js                 # Main server file
-├── package.json             # Dependencies and scripts
-├── .env                     # Environment variables
-├── seedData.js              # Database seeding script
-├── models/                  # MongoDB models
-│   ├── Artist.js
-│   ├── Artwork.js
-│   └── User.js
-├── routes/                  # API routes
-│   ├── auth.js
-│   ├── artists.js
-│   ├── artworks.js
-│   └── users.js
-├── middleware/              # Custom middleware
-│   └── auth.js
-├── public/                  # Frontend assets
-│   ├── index.html
-│   ├── css/
-│   │   ├── main.css
-│   │   ├── components.css
-│   │   └── animations.css
-│   ├── js/
-│   │   ├── main.js
-│   │   ├── api.js
-│   │   ├── auth.js
-│   │   ├── components.js
-│   │   └── utils.js
-│   └── images/
-└── uploads/                 # User uploaded files
-```
+### Warli Art
+- **Origin**: Maharashtra
+- **Style**: Geometric patterns, nature motifs
+- **Characteristics**: Simple, monochromatic designs
+
+### Pithora Art
+- **Origin**: Gujarat
+- **Style**: Wall paintings, ceremonial themes
+- **Characteristics**: Vibrant colors, horse motifs
+
+### Madhubani Art
+- **Origin**: Bihar
+- **Style**: Intricate patterns, religious themes
+- **Characteristics**: Detailed, colorful designs
+
+### Gond Art
+- **Origin**: Central India
+- **Style**: Dot-based patterns, tribal mythology
+- **Characteristics**: Unique dot technique
+
+### Kalamkari Art
+- **Origin**: Andhra Pradesh
+- **Style**: Hand-painted textiles, mythological narratives
+- **Characteristics**: Natural dyes, detailed storytelling
+
+### Patachitra Art
+- **Origin**: Odisha
+- **Style**: Scroll paintings, religious stories
+- **Characteristics**: Traditional scroll format
 
 ## 🔧 API Endpoints
 
 ### Authentication
-- `POST /api/auth/login` - User/Artist login
-- `POST /api/auth/register/user` - User registration
-- `POST /api/auth/register/artist` - Artist registration
+- `POST /api/auth/register/artist` - Register as artist
+- `POST /api/auth/register/user` - Register as user
+- `POST /api/auth/login` - Login
 - `GET /api/auth/profile` - Get current user profile
 
 ### Artists
-- `GET /api/artists` - Get all artists (with filtering)
-- `GET /api/artists/featured` - Get featured artists
+- `GET /api/artists` - Get all artists
 - `GET /api/artists/:id` - Get artist by ID
-- `POST /api/artists/:id/follow` - Follow/unfollow artist
-- `PUT /api/artists/profile` - Update artist profile
+- `GET /api/artists/:id/verification-status` - Get verification status
+- `GET /api/artists/verification/stats` - Get verification statistics
 
 ### Artworks
-- `GET /api/artworks` - Get all artworks (with filtering)
-- `GET /api/artworks/featured/highlights` - Get featured artworks
+- `GET /api/artworks` - Get all artworks
 - `GET /api/artworks/:id` - Get artwork by ID
-- `POST /api/artworks` - Create new artwork (artists only)
+- `POST /api/artworks` - Create new artwork
 - `POST /api/artworks/:id/like` - Like/unlike artwork
-- `POST /api/artworks/:id/comment` - Add comment to artwork
+- `POST /api/artworks/:id/comment` - Add comment
 
-### Users
-- `GET /api/users/profile` - Get user profile
-- `PUT /api/users/profile` - Update user profile
-- `GET /api/users/favorites` - Get user's favorite artworks
-- `GET /api/users/following` - Get user's followed artists
-- `GET /api/users/recommendations` - Get personalized recommendations
+## 🎯 Key Features Implementation
 
-## 🎨 Design Philosophy
+### Content-Based Badging System
+```javascript
+// Automatic verification check
+const checkArtistVerification = async (artistId) => {
+  const artworkCount = await Artwork.countDocuments({ 
+    artist: artistId, 
+    status: 'published' 
+  });
+  
+  if (artworkCount >= 3) {
+    await Artist.findByIdAndUpdate(artistId, { isVerified: true });
+  }
+};
+```
 
-### Color Palette
-Our design draws inspiration from traditional Indian art colors:
-- **Primary Orange** (#FF6B35) - Energy and creativity
-- **Saffron** (#FF9933) - Sacred and auspicious
-- **Deep Blue** (#264653) - Stability and trust
-- **Gold** (#F4A261) - Prosperity and heritage
-- **Earth Tones** - Natural and authentic feel
+### User Authentication
+```javascript
+// JWT-based authentication
+const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { 
+  expiresIn: '7d' 
+});
+```
 
-### Typography
-- **Playfair Display** - Elegant serif for headings
-- **Inter** - Clean sans-serif for body text
-- **Noto Sans Devanagari** - Support for Hindi text
+### Interactive UI Components
+```javascript
+// Verification badge component
+static createVerificationStatusModal(verificationData) {
+  // Dynamic modal content with progress tracking
+}
+```
 
-### User Experience
-- **Intuitive Navigation** - Easy to explore and discover
-- **Visual Storytelling** - Art takes center stage
-- **Responsive Design** - Seamless across all devices
-- **Accessibility** - Inclusive design principles
-- **Performance** - Optimized for fast loading
+## 🚀 Deployment
 
-## 🌍 Real-World Impact
+### Production Setup
+1. Set up MongoDB Atlas or production MongoDB instance
+2. Configure environment variables for production
+3. Set up reverse proxy (nginx) for SSL termination
+4. Use PM2 or similar process manager
+5. Configure monitoring and logging
 
-### Problem Solved
-- **Limited Visibility**: Traditional artists struggle to reach wider audiences
-- **Cultural Preservation**: Risk of losing traditional techniques and stories
-- **Economic Sustainability**: Artists need modern platforms to sustain livelihoods
-- **Knowledge Gap**: Younger generations losing connection to heritage
-
-### Solution Provided
-- **Global Reach**: Connect artists with worldwide audiences
-- **Digital Preservation**: Document and preserve traditional techniques
-- **Economic Empowerment**: Direct sales and commission opportunities
-- **Educational Platform**: Learn about and appreciate folk art heritage
-
-## 📈 Future Enhancements
-
-### Phase 2 Features
-- **Virtual Workshops**: Online learning sessions with master artists
-- **AR/VR Integration**: Immersive art exploration
-- **Mobile App**: Native mobile applications
-- **Marketplace**: Enhanced e-commerce features
-- **Artist Collaboration**: Tools for artistic partnerships
-
-### Phase 3 Features
-- **International Expansion**: Support for global folk art traditions
-- **AI Recommendations**: Advanced personalization
-- **Live Streaming**: Real-time art creation sessions
-- **NFT Integration**: Digital ownership and collectibles
+### Environment Variables
+```env
+NODE_ENV=production
+MONGODB_URI=your-production-mongodb-uri
+JWT_SECRET=your-production-secret
+PORT=3000
+```
 
 ## 🤝 Contributing
 
-We welcome contributions from developers, designers, and art enthusiasts!
-
-### How to Contribute
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-### Development Guidelines
-- Follow existing code style and conventions
-- Write meaningful commit messages
-- Test your changes thoroughly
-- Update documentation as needed
-
-## 📞 Support
-
-For support, feedback, or collaboration opportunities:
-- **Email**: support@kalaheritage.com
-- **Website**: www.kalaheritage.com
-- **Social Media**: @KalaHeritage
-
-## 📄 License
+## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- Traditional folk artists who preserve our cultural heritage
-- The vibrant communities that keep these art forms alive
-- Open source contributors and the developer community
-- Cultural institutions supporting traditional arts
+- Traditional Indian artists for preserving these beautiful artforms
+- The open-source community for amazing tools and libraries
+- Cultural heritage organizations for inspiration and guidance
+
+## 📞 Support
+
+For support and questions:
+- Create an issue in the repository
+- Contact the development team
+- Check the documentation
 
 ---
 
-**Built with ❤️ for preserving India's rich cultural heritage**
-
-*Kala Heritage - Where Tradition Meets Technology*
+**Kala Heritage** - Preserving India's Folk Art Legacy for Future Generations 🎨
