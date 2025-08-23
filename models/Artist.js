@@ -78,4 +78,13 @@ const artistSchema = new mongoose.Schema({
 // Index for search functionality
 artistSchema.index({ name: 'text', bio: 'text', artform: 'text' });
 
+// Pre-save middleware to auto-verify artists with 3+ artworks
+artistSchema.pre('save', function(next) {
+  // Auto-verify artists with 3 or more artworks
+  if (this.artworks && this.artworks.length >= 3) {
+    this.isVerified = true;
+  }
+  next();
+});
+
 module.exports = mongoose.model('Artist', artistSchema);

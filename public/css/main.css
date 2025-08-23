@@ -414,6 +414,23 @@ p {
   justify-content: center;
 }
 
+.btn-success {
+  background: var(--secondary-green);
+  color: var(--white);
+  border-color: var(--secondary-green);
+}
+
+.btn-success:hover {
+  background: #0d9488;
+  border-color: #0d9488;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 /* Sections */
 .section-header {
   text-align: center;
@@ -647,7 +664,7 @@ p {
   position: absolute;
   top: var(--spacing-md);
   right: var(--spacing-md);
-  background: var(--secondary-green);
+  background: linear-gradient(135deg, var(--secondary-green), #10b981);
   color: var(--white);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-sm);
@@ -656,6 +673,41 @@ p {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  box-shadow: var(--shadow-sm);
+  animation: pulse 2s infinite;
+  z-index: 10;
+}
+
+.verified-badge i {
+  font-size: 0.7rem;
+}
+
+.verified-badge:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+/* Enhanced verified badge for artist profiles */
+.artist-profile .verified-badge {
+  position: relative;
+  top: auto;
+  right: auto;
+  margin-left: 0.5rem;
+  display: inline-flex;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+}
+
+/* Verified badge in different contexts */
+.artist-card .verified-badge {
+  background: rgba(16, 185, 129, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.verified-indicator {
+  color: var(--secondary-green);
+  margin-left: 0.25rem;
+  font-size: 0.9rem;
 }
 
 /* Gallery Section */

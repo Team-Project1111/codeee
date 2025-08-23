@@ -160,15 +160,31 @@ class KalaHeritageApp {
     const featuredArtistsGrid = document.getElementById('featured-artists');
     
     try {
-      // Use sample data for demo
-      const artists = SampleData.sampleArtists;
+      console.log('Loading featured artists...');
       
-      const html = artists.map((artist, index) => {
+      // Try API first, fallback to sample data
+      let artists;
+      try {
+        const response = await API.getFeaturedArtists();
+        artists = response.artists || response;
+        console.log('Loaded artists from API:', artists?.length || 0);
+      } catch (apiError) {
+        console.log('API failed, using sample data');
+        artists = SampleData.sampleArtists || [];
+      }
+
+      if (!artists || artists.length === 0) {
+        console.log('No artists found, using fallback data');
+        artists = this.getFallbackArtists();
+      }
+      
+      const html = artists.slice(0, 8).map((artist, index) => {
         const card = ComponentFactory.createArtistCard(artist);
-        return `<div class="scroll-reveal stagger-${(index % 3) + 1}">${card}</div>`;
+        return `<div class="scroll-reveal stagger-${(index % 4) + 1}">${card}</div>`;
       }).join('');
 
       featuredArtistsGrid.innerHTML = html;
+      console.log('Artists loaded successfully');
 
       // Setup artist click handlers
       this.setupArtistClickHandlers();
@@ -183,18 +199,37 @@ class KalaHeritageApp {
     const galleryGrid = document.getElementById('gallery-grid');
     
     try {
-      // Use sample data for demo
-      const artworks = SampleData.sampleArtworks;
+      console.log('Loading featured artworks...');
       
-      const html = artworks.map((artwork, index) => {
+      // Try API first, fallback to sample data
+      let artworks;
+      try {
+        const response = await API.getFeaturedHighlights();
+        artworks = response.artworks || response;
+        console.log('Loaded artworks from API:', artworks?.length || 0);
+      } catch (apiError) {
+        console.log('API failed, using sample data');
+        artworks = SampleData.sampleArtworks || [];
+      }
+
+      if (!artworks || artworks.length === 0) {
+        console.log('No artworks found, using fallback data');
+        artworks = this.getFallbackArtworks();
+      }
+      
+      const html = artworks.slice(0, 12).map((artwork, index) => {
         const card = ComponentFactory.createArtworkCard(artwork);
-        return `<div class="scroll-reveal stagger-${(index % 3) + 1}">${card}</div>`;
+        return `<div class="scroll-reveal stagger-${(index % 4) + 1}">${card}</div>`;
       }).join('');
 
       galleryGrid.innerHTML = html;
+      console.log('Artworks loaded successfully');
 
-      // Setup artwork click handlers
+      // Setup artwork click handlers and gallery filters
       this.setupArtworkClickHandlers();
+      if (typeof Gallery !== 'undefined' && Gallery.setupFilters) {
+        Gallery.setupFilters();
+      }
       
     } catch (error) {
       console.error('Error loading featured artworks:', error);
@@ -222,17 +257,192 @@ class KalaHeritageApp {
     });
   }
 
+  getFallbackArtists() {
+    return [
+      {
+        _id: 'fallback-1',
+        name: 'Meera Devi',
+        artform: 'Madhubani',
+        location: { city: 'Madhubani', state: 'Bihar' },
+        profileImage: null,
+        bio: 'Master artist preserving traditional Madhubani art for over 30 years',
+        experience: 30,
+        rating: 4.8,
+        followers: [],
+        artworks: [],
+        isVerified: true
+      },
+      {
+        _id: 'fallback-2',
+        name: 'Ravi Bhil',
+        artform: 'Warli',
+        location: { city: 'Dahanu', state: 'Maharashtra' },
+        profileImage: null,
+        bio: 'Traditional Warli artist from the Warli tribe',
+        experience: 25,
+        rating: 4.9,
+        followers: [],
+        artworks: [],
+        isVerified: true
+      },
+      {
+        _id: 'fallback-3',
+        name: 'Kiran Patel',
+        artform: 'Pithora',
+        location: { city: 'Vadodara', state: 'Gujarat' },
+        profileImage: null,
+        bio: 'Renowned Pithora artist known for vibrant ceremonial paintings',
+        experience: 20,
+        rating: 4.7,
+        followers: [],
+        artworks: [],
+        isVerified: true
+      }
+    ];
+  }
+
+  getFallbackArtworks() {
+    return [
+      {
+        _id: 'fallback-art-1',
+        title: 'Village Life',
+        description: 'Traditional Warli painting depicting daily village activities',
+        artform: 'Warli',
+        artist: { _id: 'fallback-2', name: 'Ravi Bhil', artform: 'Warli', isVerified: true },
+        images: ['/images/placeholder.svg'],
+        price: 15000,
+        isForSale: true,
+        views: 245,
+        likes: [],
+        comments: [],
+        featured: true
+      },
+      {
+        _id: 'fallback-art-2',
+        title: 'Goddess Durga',
+        description: 'Beautiful Madhubani painting of Goddess Durga',
+        artform: 'Madhubani',
+        artist: { _id: 'fallback-1', name: 'Meera Devi', artform: 'Madhubani', isVerified: true },
+        images: ['/images/placeholder.svg'],
+        price: 25000,
+        isForSale: true,
+        views: 189,
+        likes: [],
+        comments: [],
+        featured: true
+      },
+      {
+        _id: 'fallback-art-3',
+        title: 'Ceremonial Horses',
+        description: 'Vibrant Pithora art featuring ceremonial horses',
+        artform: 'Pithora',
+        artist: { _id: 'fallback-3', name: 'Kiran Patel', artform: 'Pithora', isVerified: true },
+        images: ['/images/placeholder.svg'],
+        price: 18000,
+        isForSale: true,
+        views: 167,
+        likes: [],
+        comments: [],
+        featured: true
+      }
+    ];
+  }
+
   setupViewAllButtons() {
     const viewAllArtistsBtn = document.getElementById('view-all-artists');
     const viewAllArtworksBtn = document.getElementById('view-all-artworks');
 
-    viewAllArtistsBtn.addEventListener('click', () => {
-      Utils.toast.show('Artists directory coming soon!', 'info');
-    });
+    if (viewAllArtistsBtn) {
+      viewAllArtistsBtn.addEventListener('click', () => {
+        this.showAllArtists();
+      });
+    }
 
-    viewAllArtworksBtn.addEventListener('click', () => {
-      Utils.toast.show('Full gallery coming soon!', 'info');
-    });
+    if (viewAllArtworksBtn) {
+      viewAllArtworksBtn.addEventListener('click', () => {
+        this.showAllArtworks();
+      });
+    }
+  }
+
+  async showAllArtists() {
+    try {
+      const artistsGrid = document.getElementById('featured-artists');
+      Utils.loading.show();
+      
+      // Get all artists (not just featured)
+      let artists;
+      try {
+        const response = await API.getArtists();
+        artists = response.artists || response;
+      } catch (apiError) {
+        artists = SampleData.sampleArtists || this.getFallbackArtists();
+      }
+
+      const html = artists.map((artist, index) => {
+        const card = ComponentFactory.createArtistCard(artist);
+        return `<div class="scroll-reveal stagger-${(index % 4) + 1}">${card}</div>`;
+      }).join('');
+      
+      artistsGrid.innerHTML = html;
+      this.setupArtistClickHandlers();
+      
+      // Change button text to indicate all artists are shown
+      const viewAllBtn = document.getElementById('view-all-artists');
+      if (viewAllBtn) {
+        viewAllBtn.innerHTML = '<i class="fas fa-check"></i> All Artists Shown';
+        viewAllBtn.disabled = true;
+        viewAllBtn.classList.add('btn-success');
+      }
+      
+      Utils.loading.hide();
+      Utils.toast.show(`Showing all ${artists.length} artists`, 'success');
+      
+    } catch (error) {
+      console.error('Error loading all artists:', error);
+      Utils.loading.hide();
+      Utils.toast.show('Error loading artists', 'error');
+    }
+  }
+
+  async showAllArtworks() {
+    try {
+      const galleryGrid = document.getElementById('gallery-grid');
+      Utils.loading.show();
+      
+      // Get all artworks (not just featured)
+      let artworks;
+      try {
+        const response = await API.getArtworks();
+        artworks = response.artworks || response;
+      } catch (apiError) {
+        artworks = SampleData.sampleArtworks || this.getFallbackArtworks();
+      }
+
+      const html = artworks.map((artwork, index) => {
+        const card = ComponentFactory.createArtworkCard(artwork);
+        return `<div class="scroll-reveal stagger-${(index % 4) + 1}">${card}</div>`;
+      }).join('');
+      
+      galleryGrid.innerHTML = html;
+      this.setupArtworkClickHandlers();
+      
+      // Change button text to indicate all artworks are shown
+      const viewAllBtn = document.getElementById('view-all-artworks');
+      if (viewAllBtn) {
+        viewAllBtn.innerHTML = '<i class="fas fa-check"></i> Full Gallery';
+        viewAllBtn.disabled = true;
+        viewAllBtn.classList.add('btn-success');
+      }
+      
+      Utils.loading.hide();
+      Utils.toast.show(`Showing all ${artworks.length} artworks`, 'success');
+      
+    } catch (error) {
+      console.error('Error loading all artworks:', error);
+      Utils.loading.hide();
+      Utils.toast.show('Error loading artworks', 'error');
+    }
   }
 
   showArtformGallery(artform) {

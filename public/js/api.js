@@ -258,7 +258,7 @@ window.SampleData = {
       experience: 30,
       rating: 4.8,
       followers: [],
-      artworks: [],
+      artworks: ['art1', 'art2', 'art5'],
       isVerified: true
     },
     {
@@ -271,7 +271,7 @@ window.SampleData = {
       experience: 25,
       rating: 4.9,
       followers: [],
-      artworks: [],
+      artworks: ['art3', 'art6', 'art7', 'art8'],
       isVerified: true
     },
     {
@@ -284,8 +284,34 @@ window.SampleData = {
       experience: 20,
       rating: 4.7,
       followers: [],
-      artworks: [],
+      artworks: ['art4'],
+      isVerified: false
+    },
+    {
+      _id: '4',
+      name: 'Anita Sharma',
+      artform: 'Gond',
+      location: { city: 'Bhopal', state: 'Madhya Pradesh' },
+      profileImage: null,
+      bio: 'Young Gond artist bringing contemporary touch to traditional tribal art',
+      experience: 8,
+      rating: 4.5,
+      followers: [],
+      artworks: ['art9', 'art10', 'art11'],
       isVerified: true
+    },
+    {
+      _id: '5',
+      name: 'Ramesh Kumar',
+      artform: 'Kalamkari',
+      location: { city: 'Srikalahasti', state: 'Andhra Pradesh' },
+      profileImage: null,
+      bio: 'Traditional Kalamkari artist specializing in mythological narratives',
+      experience: 15,
+      rating: 4.6,
+      followers: [],
+      artworks: ['art12'],
+      isVerified: false
     }
   ],
 

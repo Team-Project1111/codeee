@@ -134,6 +134,12 @@ router.post('/', authenticateToken, async (req, res) => {
 
     // Add artwork to artist's artworks array
     req.user.artworks.push(artwork._id);
+    
+    // Auto-verify if artist now has 3+ artworks
+    if (req.user.artworks.length >= 3) {
+      req.user.isVerified = true;
+    }
+    
     await req.user.save();
 
     const populatedArtwork = await Artwork.findById(artwork._id)
