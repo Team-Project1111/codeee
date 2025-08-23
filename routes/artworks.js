@@ -6,6 +6,25 @@ const { authenticateToken, optionalAuth } = require('../middleware/auth');
 
 const router = express.Router();
 
+// Function to check and update artist verification status
+const checkArtistVerification = async (artistId) => {
+  try {
+    const artworkCount = await Artwork.countDocuments({ 
+      artist: artistId, 
+      status: 'published' 
+    });
+    
+    const artist = await Artist.findById(artistId);
+    if (artist && artworkCount >= 3 && !artist.isVerified) {
+      artist.isVerified = true;
+      await artist.save();
+      console.log(`Artist ${artist.name} has been verified with ${artworkCount} artworks`);
+    }
+  } catch (error) {
+    console.error('Error checking artist verification:', error);
+  }
+};
+
 // Get all artworks with filtering and pagination
 router.get('/', optionalAuth, async (req, res) => {
   try {
@@ -136,8 +155,11 @@ router.post('/', authenticateToken, async (req, res) => {
     req.user.artworks.push(artwork._id);
     await req.user.save();
 
+    // Check and update verification status
+    await checkArtistVerification(req.user._id);
+
     const populatedArtwork = await Artwork.findById(artwork._id)
-      .populate('artist', 'name profileImage artform');
+      .populate('artist', 'name profileImage artform isVerified');
 
     res.status(201).json({
       message: 'Artwork created successfully',

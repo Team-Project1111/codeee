@@ -103,6 +103,7 @@ class KalaHeritageApp {
   setupHeroSection() {
     const exploreBtn = document.getElementById('explore-btn');
     const joinBtn = document.getElementById('join-btn');
+    const verificationStatsBtn = document.getElementById('verification-stats-btn');
 
     exploreBtn.addEventListener('click', () => {
       const artformsSection = document.getElementById('artforms');
@@ -111,6 +112,10 @@ class KalaHeritageApp {
 
     joinBtn.addEventListener('click', () => {
       Utils.modal.show('auth-modal');
+    });
+
+    verificationStatsBtn.addEventListener('click', () => {
+      this.showVerificationStats();
     });
 
     // Animate hero stats
@@ -207,9 +212,121 @@ class KalaHeritageApp {
     artistCards.forEach(card => {
       card.addEventListener('click', () => {
         const artistId = card.dataset.artistId;
-        Search.showArtistDetail(artistId);
+        this.showArtistProfile(artistId);
       });
     });
+
+    // Add verification badge click handlers
+    const verificationBadges = document.querySelectorAll('.verified-badge');
+    verificationBadges.forEach(badge => {
+      badge.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const artistCard = badge.closest('.artist-card');
+        const artistId = artistCard.dataset.artistId;
+        this.showVerificationStatus(artistId);
+      });
+    });
+
+    // Add verification progress click handlers
+    const verificationProgress = document.querySelectorAll('.verification-progress');
+    verificationProgress.forEach(progress => {
+      progress.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const artistCard = progress.closest('.artist-card');
+        const artistId = artistCard.dataset.artistId;
+        this.showVerificationStatus(artistId);
+      });
+    });
+  }
+
+  async showVerificationStatus(artistId) {
+    try {
+      Utils.loading.show();
+      
+      // Try to get real data from API, fallback to sample data
+      let verificationData;
+      try {
+        verificationData = await API.getArtistVerificationStatus(artistId);
+      } catch (error) {
+        console.log('Using sample verification data');
+        // Find artist in sample data
+        const artist = SampleData.sampleArtists.find(a => a._id === artistId);
+        if (artist) {
+          verificationData = {
+            isVerified: artist.isVerified,
+            artworkCount: artist.artworks.length,
+            meetsCriteria: artist.artworks.length >= 3,
+            criteria: {
+              requiredArtworks: 3,
+              currentArtworks: artist.artworks.length
+            }
+          };
+        } else {
+          throw new Error('Artist not found');
+        }
+      }
+      
+      const modalContent = ComponentFactory.createVerificationStatusModal(verificationData);
+      
+      Utils.modal.show('verification-modal', {
+        title: 'Verification Status',
+        content: modalContent,
+        size: 'medium'
+      });
+    } catch (error) {
+      console.error('Error loading verification status:', error);
+      Utils.toast.show('Failed to load verification status', 'error');
+    } finally {
+      Utils.loading.hide();
+    }
+  }
+
+  async showArtistProfile(artistId) {
+    try {
+      Utils.loading.show();
+      const artist = await API.getArtist(artistId);
+      
+      const modalContent = ComponentFactory.createArtistProfileModal(artist);
+      
+      Utils.modal.show('artist-profile-modal', {
+        title: `${artist.name}'s Profile`,
+        content: modalContent,
+        size: 'large'
+      });
+    } catch (error) {
+      console.error('Error loading artist profile:', error);
+      Utils.toast.show('Failed to load artist profile', 'error');
+    } finally {
+      Utils.loading.hide();
+    }
+  }
+
+  async showVerificationStats() {
+    try {
+      Utils.loading.show();
+      
+      // Try to get real data from API, fallback to sample data
+      let stats;
+      try {
+        stats = await API.getVerificationStats();
+      } catch (error) {
+        console.log('Using sample verification stats');
+        stats = SampleData.verificationStats;
+      }
+      
+      const modalContent = ComponentFactory.createVerificationStatsModal(stats);
+      
+      Utils.modal.show('verification-stats-modal', {
+        title: 'Verification Statistics',
+        content: modalContent,
+        size: 'medium'
+      });
+    } catch (error) {
+      console.error('Error loading verification stats:', error);
+      Utils.toast.show('Failed to load verification statistics', 'error');
+    } finally {
+      Utils.loading.hide();
+    }
   }
 
   setupArtworkClickHandlers() {

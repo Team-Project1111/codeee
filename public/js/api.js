@@ -102,6 +102,15 @@ class ApiService {
     return this.request(`/artists/${artistId}/stats`);
   }
 
+  // Verification badge methods
+  async getArtistVerificationStatus(artistId) {
+    return this.request(`/artists/${artistId}/verification-status`);
+  }
+
+  async getVerificationStats() {
+    return this.request('/artists/verification/stats');
+  }
+
   async updateArtistProfile(profileData) {
     return this.request('/artists/profile', {
       method: 'PUT',
@@ -258,7 +267,7 @@ window.SampleData = {
       experience: 30,
       rating: 4.8,
       followers: [],
-      artworks: [],
+      artworks: ['1', '2', '3', '4', '5'],
       isVerified: true
     },
     {
@@ -271,7 +280,7 @@ window.SampleData = {
       experience: 25,
       rating: 4.9,
       followers: [],
-      artworks: [],
+      artworks: ['6', '7', '8'],
       isVerified: true
     },
     {
@@ -284,10 +293,56 @@ window.SampleData = {
       experience: 20,
       rating: 4.7,
       followers: [],
-      artworks: [],
+      artworks: ['9', '10', '11'],
       isVerified: true
+    },
+    {
+      _id: '4',
+      name: 'Priya Gond',
+      artform: 'Gond',
+      location: { city: 'Bhopal', state: 'Madhya Pradesh' },
+      profileImage: null,
+      bio: 'Young Gond artist bringing modern interpretations to traditional dot art',
+      experience: 8,
+      rating: 4.5,
+      followers: [],
+      artworks: ['12', '13'],
+      isVerified: false
+    },
+    {
+      _id: '5',
+      name: 'Anita Kalamkari',
+      artform: 'Kalamkari',
+      location: { city: 'Machilipatnam', state: 'Andhra Pradesh' },
+      profileImage: null,
+      bio: 'Traditional Kalamkari artist specializing in mythological narratives',
+      experience: 15,
+      rating: 4.6,
+      followers: [],
+      artworks: ['14', '15', '16'],
+      isVerified: true
+    },
+    {
+      _id: '6',
+      name: 'Rajesh Patachitra',
+      artform: 'Patachitra',
+      location: { city: 'Puri', state: 'Odisha' },
+      profileImage: null,
+      bio: 'Scroll painting artist preserving ancient religious stories',
+      experience: 12,
+      rating: 4.4,
+      followers: [],
+      artworks: ['17'],
+      isVerified: false
     }
   ],
+
+  verificationStats: {
+    totalArtists: 6,
+    verifiedArtists: 4,
+    artistsWith3PlusArtworks: 5,
+    verificationRate: 66.7
+  },
 
   sampleArtworks: [
     {
@@ -348,6 +403,46 @@ window.SampleData = {
       comments: [],
       featured: true,
       price: 6500,
+      isForSale: true
+    },
+    {
+      _id: '4',
+      title: 'Tree of Life',
+      description: 'Traditional Madhubani tree of life with birds and animals',
+      artform: 'Madhubani',
+      artist: {
+        _id: '1',
+        name: 'Meera Devi',
+        profileImage: null,
+        artform: 'Madhubani',
+        isVerified: true
+      },
+      images: [{ url: null, caption: 'Tree of Life Madhubani Art' }],
+      likes: [],
+      views: 156,
+      comments: [],
+      featured: false,
+      price: 6000,
+      isForSale: true
+    },
+    {
+      _id: '5',
+      title: 'Wedding Ceremony',
+      description: 'Traditional Madhubani wedding scene with intricate details',
+      artform: 'Madhubani',
+      artist: {
+        _id: '1',
+        name: 'Meera Devi',
+        profileImage: null,
+        artform: 'Madhubani',
+        isVerified: true
+      },
+      images: [{ url: null, caption: 'Wedding Ceremony Madhubani Art' }],
+      likes: [],
+      views: 198,
+      comments: [],
+      featured: false,
+      price: 7500,
       isForSale: true
     }
   ]
